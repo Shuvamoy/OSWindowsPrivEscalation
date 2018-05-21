@@ -86,6 +86,48 @@ Get details about a group (i.e. administrators)
     net localgroup administrators
 
 
+## Identifying known vulnerabilities
+In this section we will use the output of the *systeminfo* command in order to learn what updates were installed on the system. This information can be processed by an automated tool like https://github.com/GDSSecurity/Windows-Exploit-Suggester that can automatically provide us with the list of known exploits for the target system:
+
+    python windows-exploit-suggester.py --database 2018-05-21-mssb.xls --systeminfo ../systeminfo.txt
+    [*] initiating winsploit version 3.3...
+    [*] database file detected as xls or xlsx based on extension
+    [*] attempting to read from the systeminfo input file
+    [+] systeminfo input file read successfully (ascii)
+    [*] querying database file for potential vulnerabilities
+    [*] comparing the 208 hotfix(es) against the 386 potential bulletins(s) with a database of 137 known exploits
+    [*] there are now 115 remaining vulns
+    [+] [E] exploitdb PoC, [M] Metasploit module, [*] missing bulletin
+    [+] windows version identified as 'Windows 7 SP1 64-bit'
+    [*] 
+    [...]
+    [E] MS16-063: Cumulative Security Update for Internet Explorer (3163649) - Critical
+    [*]   https://www.exploit-db.com/exploits/39994/ -- Internet Explorer 11 - Garbage Collector Attribute Type Confusion (MS16-063), PoC
+    [*] 
+    [M] MS15-051: Vulnerabilities in Windows Kernel-Mode Drivers Could Allow Elevation of Privilege (3057191) - Important
+    [*]   https://github.com/hfiref0x/CVE-2015-1701, Win32k Elevation of Privilege Vulnerability, PoC
+    [*]   https://www.exploit-db.com/exploits/37367/ -- Windows ClientCopyImage Win32k Exploit, MSF
+    [*] 
+    [E] MS14-026: Vulnerability in .NET Framework Could Allow Elevation of Privilege (2958732) - Important
+    [*]   http://www.exploit-db.com/exploits/35280/, -- .NET Remoting Services Remote Command Execution, PoC
+    [*] 
+    [M] MS13-090: Cumulative Security Update of ActiveX Kill Bits (2900986) - Critical
+    [*] done
+
+We can as well manually analyze the list included in the *systeminfo* output:
+
+    [...]
+    Hotfix(s):                 208 Hotfix(s) Installed.
+                               [01]: KB2849697
+                               [02]: KB2849696
+                               [03]: KB2841134
+    [...]
+                               [207]: KB3156019
+                               [208]: KB976902
+    [...]
+
+Based on the list we can estimate what is the most recent update installed/what was the last time the system was upgraded.
+
 
 ## Network Enumuration
 You will want to know how this host is connected; what kind of protocls and services are running, and finally maybe even tap into one of the interfaces and learn what's going on
